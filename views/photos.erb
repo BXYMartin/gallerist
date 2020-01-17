@@ -1,6 +1,6 @@
 <h1><%= @title %></h1>
 
-<div class="row" style="display: flex;flex-wrap: wrap;">
+<div class="row arrange">
   <% @photos.order(:date).each do |photo| %>
     <%= partial :thumbnail, locals: { photo: photo } %>
   <% end %>

@@ -1,5 +1,5 @@
-   <div class="thumbnail-wrapper">
-      <a style="display: block;" href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
+   <div style="pointer-events: none;" class="thumbnail-wrapper">
+      <a style="display: block;pointer-events: all;" href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
          data-id="<%= photo.id %>"
          data-meta='<%= photo.metadata.to_json %>'
          data-type="<%= photo.video? ? 'video' : 'image' %>"></a>

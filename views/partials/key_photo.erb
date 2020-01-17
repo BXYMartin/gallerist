@@ -1,6 +1,5 @@
-   <div class="thumbnail-wrapper">
-    <a style="display: block;" href="<%= url_for album %>" class="thumbnail">
-    </a>
+   <div style="pointer-events: none;" class="thumbnail-wrapper">
      <h1 style="z-index: 99999;bottom: 0px;position: absolute;width: 100%;text-align: center;color: azure;text-shadow: 0 0 1em black;overflow: hidden;"><%= album.name %></h1>
-     <img class="img_wrap" style="padding: 4px;position: absolute;top: 0;width: 100%;vertical-align: bottom;" data-layzr="/thumbs/<%= album.key_photo_with_fallback.id %>">
+     <a style="display: block;pointer-events: all;" href="<%= url_for album %>" class="thumbnail"></a>
+     <img class="img_wrap" style="transform: scale(0.95);border-radius: 20px;box-shadow: 0 0 1px 0 rgba(0,12,32,0.40), 0 10px 16px 0 rgba(10,31,68,0.40);padding: 0;position: absolute;top: 0;width: 100%;vertical-align: bottom;" data-layzr="/thumbs/<%= album.key_photo_with_fallback.id %>">
   </div>

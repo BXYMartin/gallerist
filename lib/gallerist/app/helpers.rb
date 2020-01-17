@@ -71,7 +71,7 @@ module Gallerist::App::Helpers
       end
       size = size % [ obj.key_face.link_size ]
       link = '<span class="face" data-layzr="/photos/%d" data-layzr-bg
-              style="background-position: %f%% %f%%; background-size: %s"></span> %s' %
+              style="background-position: %f%% %f%%; background-size: %s"><h1 style="text-shadow: black 0 0 1em;">%s</h1></span>' %
               [ obj.key_photo.id, obj.key_face.position_x, obj.key_face.position_y, size, obj.name ]
     when Gallerist::Tag
       classes << 'tag'
