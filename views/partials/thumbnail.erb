@@ -1,10 +1,10 @@
-<a href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
-   data-id="<%= photo.id %>"
-   data-meta='<%= photo.metadata.to_json %>'
-   data-type="<%= photo.video? ? 'video' : 'image' %>">
    <div class="thumbnail-wrapper">
-     <i style="display: block;"></i>
-     <img class="img_wrap" style="position: absolute;top: 0;width: 100%;vertical-align: bottom;" data-layzr="/thumbs/<%= photo.id %>">
+      <a style="display: block;" href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
+         data-id="<%= photo.id %>"
+         data-meta='<%= photo.metadata.to_json %>'
+         data-type="<%= photo.video? ? 'video' : 'image' %>"></a>
+
+     <img class="img_wrap" style="padding: 4px;position: absolute;top: 0;width: 100%;vertical-align: bottom;" data-layzr="/thumbs/<%= photo.id %>">
      <% if photo.is_favorite? && request.path != '/favorites' %>
        <i class="fa fa-heart fa-lg top-left"></i>
      <% end %>
@@ -12,4 +12,3 @@
        <i class="fa fa-film fa-lg bottom-right"></i>
      <% end %>
   </div>
-</a>

@@ -1,7 +1,6 @@
-<a href="<%= url_for album %>" class="thumbnail">
    <div class="thumbnail-wrapper">
+    <a style="display: block;" href="<%= url_for album %>" class="thumbnail">
+    </a>
      <h1 style="z-index: 99999;bottom: 0px;position: absolute;width: 100%;text-align: center;color: azure;text-shadow: 0 0 1em black;overflow: hidden;"><%= album.name %></h1>
-     <i style="display: block;"></i>
-     <img class="img_wrap" style="position: absolute;top: 0;width: 100%;vertical-align: bottom;" data-layzr="/thumbs/<%= album.key_photo_with_fallback.id %>">
+     <img class="img_wrap" style="padding: 4px;position: absolute;top: 0;width: 100%;vertical-align: bottom;" data-layzr="/thumbs/<%= album.key_photo_with_fallback.id %>">
   </div>
-</a>
