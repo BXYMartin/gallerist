@@ -12,11 +12,11 @@
   <nav class="navbar navbar-default navbar-inverse navbar-static-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <span class="navbar-brand"><strong>Gallerist</strong></span>
+        <span class="navbar-brand"><strong>Photos</strong></span>
       </div>
       <ul class="nav navbar-nav">
         <% (navbar || []).each_with_index do |item, idx| %>
-          <li<%= ' class="active"' if idx == navbar.size - 1 %>>
+          <li<%= ' class="active"' if item.first == request.path_info %>>
             <% if route_exists item.first %>
               <a href="<%= item.first %>" ><%= item.last %></a>
             <% else %>

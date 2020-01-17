@@ -156,6 +156,17 @@ $(function(){
     $("a[href='" + currentUrl + "']").parent().prev().find('a.thumbnail').click();
   });
 
+
+  $("img.img_wrap").load(function() {
+      var h = this.height;
+      var w = this.width;
+      $(this).prev()[0].style.paddingBottom = h / w * 100 + '%';
+      $(this).parent()[0].style.width = w / h * 200 + 'px';
+      $(this).parent()[0].style.flexGrow = w / h * 200;
+      $(this).parent()[0].style.position = 'relative';
+  });
+
+
   $('a.photo').click(function(e) {
     e.preventDefault();
 

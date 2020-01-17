@@ -69,27 +69,13 @@ module Gallerist::App::Utilities
 
   def navbar_for(obj)
     @navbar = []
-    navbar_item library.name, '/'
+    navbar_item "Home | #{library.name}", '/'
 
-    case obj
-    when :all_photos
-      navbar_item 'All photos', '/photos'
-    when :favorites
-      navbar_item 'Favorites', '/favorites'
-    when :movies
-      navbar_item 'Movies', '/movies'
-    when :persons
-      navbar_item 'Persons', '/persons'
-    when :tags
-      navbar_item 'Tags', '/tags'
-    when Gallerist::Album
-      navbar_item 'Albums', '/albums'
-    when Gallerist::Person
-      navbar_item 'Persons', '/persons'
-    when Gallerist::Tag, Gallerist::MultiTag
-      navbar_item 'Tags', '/tags'
-    else #ignore
-    end
+    navbar_item 'All photos', '/photos'
+    navbar_item 'Favorites', '/favorites'
+    navbar_item 'Movies', '/movies'
+    navbar_item 'Persons', '/persons'
+    navbar_item 'Tags', '/tags'
 
     unless obj.is_a? Symbol
       navbar_item obj.name, url_for(obj)

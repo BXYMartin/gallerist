@@ -6,8 +6,6 @@
  */
 
 @import 'bootstrap';
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
 
 #photo-modal {
   display: flex;
@@ -232,6 +230,12 @@ h3 .face {
 }
 
 .thumbnail {
+    border: none;
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+.thumbnail {
   .bottom-right {
     bottom: 1em;
     right: 1em;
@@ -248,17 +252,6 @@ h3 .face {
     top: 1em;
   }
 
-  .thumbnail-container {
-    position: relative;
-    width: 100%;
-
-    &:before {
-      content: "";
-      display: block;
-      padding-top: 100%;
-    }
-  }
-
   .thumbnail-wrapper {
     bottom: 0;
     display: flex;
@@ -266,13 +259,6 @@ h3 .face {
     position: absolute;
     right: 0;
     top: 0;
-  }
-
-  .thumbnail-boundary {
-    margin: auto;
-    max-height: 100%;
-    overflow: hidden;
-    position: relative;
   }
 
   img {
