@@ -160,6 +160,7 @@ $(function(){
   $("img.img_wrap").load(function() {
       var h = this.height;
       var w = this.width;
+      $(this)[0].style.height = '100%';
       $(this).prev()[0].style.paddingBottom = h / w * 100 + '%';
       $(this).parent()[0].style.width = w / h * 200 + 'px';
       $(this).parent()[0].style.flexGrow = w / h * 200;
@@ -294,4 +295,192 @@ $(function(){
     currentPhoto.click();
     currentPhoto[0].scrollIntoView()
   }
+
+
+
+
+var svg = document.querySelector("svg");
+var draggable = false;
+var rid = null;
+var m = { x: 0, y: 0 };
+var t = { x: 100, y: 100 }; // translate
+
+var dx = 0; // distance between the center of the balloon and the click point
+
+var spring = 0.09;
+var friction = 0.80;
+
+	var slider_target = {
+		x:0,
+		y:0,
+		r:5,
+		fontSize:5
+	};
+	var slider_pos = {
+		x:0,
+		y:0,
+		r:5,
+		fontSize:5
+	};
+
+	var slider_vel = {
+		x:0,
+		y:0,
+		r:0,
+		fontSize:0
+	};
+var slider_thumb = {
+  props: { cx: 0, cy: 0, r: 2,style:"pointer-events: none;" },
+  tagName: "circle"
+};
+var slider_balloon = {
+  props: { cx: 0, cy: 0, r: 5 },
+  tagName: "circle"
+};
+var slider_label = {
+  props: { x: 0, y: 0,style:"font-size:5px" },
+  tagName: "text",
+  text_content: "50"
+};
+slider_thumb['elmt'] = drawElement(slider_thumb, '_thumb');
+slider_balloon['elmt'] = drawElement(slider_balloon, '_thumb');
+slider_label['elmt'] = drawElement(slider_label, '_thumb');
+
+ function slider_getThisTargetY(){
+	  if(draggable){
+		slider_target.y = -11;
+		slider_target.r = 9;
+		slider_target.fontSize = 8;
+		  }else{
+		slider_target.y = 0;
+		slider_target.r = 5;
+		slider_target.fontSize = 5;};
+  }
+
+ function slider_getThisTargetX(m){
+  slider_target.x = m.x - dx;
+  if (slider_target.x < -50) {
+    slider_target.x = -50 ;
+  }
+  if (slider_target.x > 50) {
+    slider_target.x = 50;
+  }
+  }
+
+ function  slider_getNewPos(prop){//x,y,r,fontSize
+    var dist = slider_target[prop] - slider_pos[prop];
+    var acc = dist * spring;
+    slider_vel[prop] += acc;
+    slider_vel[prop] *= friction;
+    slider_pos[prop] += slider_vel[prop];
+  }
+
+ function slider_update(){
+	slider_getNewPos("y");
+	slider_getNewPos("x");
+	slider_getNewPos("r");
+
+    slider_thumb.props.cx = slider_target.x;
+    slider_balloon.props.cx = slider_pos.x;
+    slider_label.props.x = slider_pos.x;
+	slider_label.elmt.textContent = Math.round(slider_target.x) + 50;
+     rescale(Math.round(slider_target.x) + 50);
+	slider_label.props.y = slider_balloon.props.cy = slider_pos.y;
+	slider_label.props.style = "font-size:"+slider_target.fontSize+"px"
+	slider_balloon.props.r = slider_pos.r;
+
+	updateElement(slider_label);
+	updateElement(slider_thumb);
+	updateElement(slider_balloon);
+  }
+
+function drawElement(o, parent) {
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  var elmt = document.createElementNS(SVG_NS, o.tagName);
+  for (var name in o.props) {
+    if (o.props.hasOwnProperty(name)) {
+      elmt.setAttributeNS(null, name, o.props[name]);
+    }
+  }
+  if (o.text_content) {
+    elmt.textContent = o.text_content;
+  }
+  document.getElementById(parent).appendChild(elmt);
+  return elmt;
+}
+
+function updateElement(o) {
+  for (var name in o.props) {
+    if (o.props.hasOwnProperty(name)) {
+      o.elmt.setAttributeNS(null, name, o.props[name]);
+    }
+  }
+}
+
+function oMousePosSVG(e) {
+  var p = svg.createSVGPoint();
+  p.x = e.clientX;
+  p.y = e.clientY;
+  var ctm = svg.getScreenCTM().inverse();
+  p = p.matrixTransform(ctm);
+  return p;
+}
+
+function transformedMousePos(e, t) {
+  var m = oMousePosSVG(e);
+  var ret = {x: m.x - t.x, y: m.y - t.y};
+  return ret;
+}
+
+function Animation() {
+  requestId = window.requestAnimationFrame(Animation);
+  slider_update();
+}
+
+Animation();
+
+slider_balloon.elmt.addEventListener("mousedown",
+  function(e) {
+	e.preventDefault();
+	draggable = true;
+    svg.style.cursor = "move";
+    m = transformedMousePos(e, t);// mouse position
+	  // distance between the center of the balloon and the click point
+    dx = m.x - this.getAttributeNS(null, "cx");
+    slider_getThisTargetY();
+  },
+  false
+);
+
+svg.addEventListener("mouseup",
+  function(e) {
+    draggable = false;
+    svg.style.cursor = "default";
+    slider_getThisTargetY();
+  },
+  false
+);
+
+svg.addEventListener("mousemove", function(e) {
+  if (draggable) {
+	m = transformedMousePos(e, t);
+    slider_getThisTargetX(m)
+  } else {
+    svg.style.cursor = "default";
+  }
 });
+});
+
+
+function rescale(scale) {
+  $("img.img_wrap").each(function() {
+      var h = this.height;
+      var w = this.width;
+      $(this)[0].style.height = '100%';
+      $(this).prev()[0].style.paddingBottom = h / w * 100 + '%';
+      $(this).parent()[0].style.width = w / h * scale + 'px';
+      $(this).parent()[0].style.flexGrow = w / h * scale;
+      $(this).parent()[0].style.position = 'relative';
+  });
+}
+

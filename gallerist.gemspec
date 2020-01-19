@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.authors     = [ 'Sebastian Staudt' ]
   s.email       = [ 'koraktor@gmail.com' ]
   s.homepage    = 'https://github.com/koraktor/gallerist'
-  s.license     = 'BSD'
+  s.license     = '0BSD'
   s.summary     = 'A web application to browse Apple Photos and iPhoto libraries'
   s.description = 'View Photos and iPhoto libraries in your browser'
 

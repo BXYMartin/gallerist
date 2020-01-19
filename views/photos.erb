@@ -1,5 +1,23 @@
 <h1><%= @title %></h1>
 
+<svg viewBox="70 67 70 70" style="z-index: 9999; position: fixed; height: 100px; width: 200px; bottom: 0px; right: 4%; transform: scale(1.5); background: rgba(170, 170, 170, 0.867); border-top-left-radius: 20px; box-shadow: rgba(0, 12, 32, 0.4) 0px 0px 1px 0px, rgba(10, 31, 68, 0.4) 0px 10px 16px 0px; cursor: default;">
+<defs>
+  <filter id="goo">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+    <feColorMatrix in="blur" mode="matrix"
+                   values="1 0 0  0   0
+                           0 1 0  0   0
+                           0 0 1  0   0
+                           0 0 0 18  -7" result="goo"/>
+    <feBlend in="SourceGraphic" in2="goo"/>
+  </filter>
+</defs>
+<g id="_slider" transform = "translate(100,100)"  >
+  <rect x="-50" y="-1" width="100" height="2"  />
+  <g id="_thumb" filter="url(#goo)"> </g>
+</g>
+</svg>
+
 <div class="row arrange">
   <% @photos.order(:date).each do |photo| %>
     <%= partial :thumbnail, locals: { photo: photo } %>

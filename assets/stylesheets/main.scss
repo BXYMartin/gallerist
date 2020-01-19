@@ -307,3 +307,24 @@ h3 .face {
         float: left;
     }
 }
+
+#_slider rect {
+  fill: White;
+  pointer-events: none;
+}
+#_slider circle {
+  fill: White;
+  /*stroke: #333;*/
+}
+
+svg text::selection {
+  background: none;
+}
+
+#_thumb > text {
+  dominant-baseline: central;
+  text-anchor: middle;
+  font-size: 5px;
+  pointer-events: none;
+  fill:#028bca;
+}

@@ -1,5 +1,5 @@
-  <div style="pointer-events: none;transition: all 0.3s ease-in-out;" class="thumbnail-wrapper scale-on-hover">
-      <a style="display: block;pointer-events: all;" href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
+  <div style="pointer-events: none;transition: all 1s ease-in-out;" class="thumbnail-wrapper scale-on-hover">
+      <a style="display: block;pointer-events: all;transition: all 1s ease-in-out 0s;" href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
          data-id="<%= photo.id %>"
          data-meta='<%= photo.metadata.to_json %>'
          data-type="<%= photo.video? ? 'video' : 'image' %>"></a>
@@ -11,7 +11,7 @@
           bottom: 0;
           right: 8px;
           display: block;
-          font-size: 30px;
+          font-size: 10%;
         ">❤️</span>
      <% end %>
      <% if photo.video? && request.path != '/movies' %>
@@ -20,7 +20,8 @@
           bottom: 0;
           right: 8px;
           display: block;
-          font-size: 30px;
+          font-size: 10%;
         ">🎞</span>
      <% end %>
   </div>
+
