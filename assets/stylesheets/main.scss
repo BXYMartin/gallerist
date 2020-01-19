@@ -106,10 +106,12 @@
     }
   }
 
-  .scale-on-hover:hover {
-      transform: scale(1.06);
-      z-index: 999;
-      box-shadow: 0 0 1px 0 rgba(0,12,32,0.40), 0 10px 16px 0 rgba(10,31,68,0.40);
+  .scale-on-hover {
+      &:hover {
+          transform: scale(1.06);
+          z-index: 999;
+          box-shadow: 0 0 1px 0 rgba(0,12,32,0.40), 0 10px 16px 0 rgba(10,31,68,0.40);
+      }
   }
 
   .view-container {
