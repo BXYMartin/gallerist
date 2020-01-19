@@ -1,4 +1,4 @@
-   <div style="pointer-events: none;transition: all 0.3s ease-in-out;" class="thumbnail-wrapper scale-on-hover">
+  <div style="pointer-events: none;transition: all 0.3s ease-in-out;" class="thumbnail-wrapper scale-on-hover">
       <a style="display: block;pointer-events: all;" href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
          data-id="<%= photo.id %>"
          data-meta='<%= photo.metadata.to_json %>'
@@ -6,9 +6,21 @@
 
      <img class="img_wrap" style="position: absolute;top: 0;width: 100%;vertical-align: bottom;" data-layzr="/thumbs/<%= photo.id %>">
      <% if photo.is_favorite? && request.path != '/favorites' %>
-       <i class="fa fa-heart fa-lg top-left"></i>
+       <span style="
+          position: absolute;
+          bottom: 0;
+          right: 8px;
+          display: block;
+          font-size: 30px;
+        ">❤️</span>
      <% end %>
      <% if photo.video? && request.path != '/movies' %>
-       <i class="fa fa-film fa-lg bottom-right"></i>
+       <span style="
+          position: absolute;
+          bottom: 0;
+          right: 8px;
+          display: block;
+          font-size: 30px;
+        ">🎞</span>
      <% end %>
   </div>
