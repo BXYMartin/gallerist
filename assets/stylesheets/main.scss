@@ -106,6 +106,12 @@
     }
   }
 
+  .scale-on-hover:hover {
+      transform: scale(1.06);
+      z-index: 999;
+      box-shadow: 0 0 1px 0 rgba(0,12,32,0.40), 0 10px 16px 0 rgba(10,31,68,0.40);
+  }
+
   .view-container {
     border: 5px solid $popover-bg;
     margin: auto;
@@ -243,6 +249,7 @@ h3 .face {
     margin-bottom: 0px;
     border-radius: 0px;
     padding: 0;
+    background-color: transparent;
 }
 
 .thumbnail {
@@ -289,4 +296,10 @@ h3 .face {
 
     @include transition(color 0.2s ease-in-out);
   }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav>li {
+        float: left;
+    }
 }

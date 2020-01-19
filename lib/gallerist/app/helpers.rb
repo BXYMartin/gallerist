@@ -57,7 +57,7 @@ module Gallerist::App::Helpers
   end
 
   def widget_for(obj)
-    classes = %w{label label-primary}
+    classes = %w{label}
 
     case obj
     when Gallerist::Person
